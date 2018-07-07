@@ -137,12 +137,6 @@ namespace ServiceStack.Redis
         internal void EndPipeline()
         {
             ResetSendBuffer();
-
-            if (Pipeline != null)
-            {
-                Pipeline = null;
-                Interlocked.Increment(ref __requestsPerHour);
-            }
         }
 
         public RedisNativeClient(string connectionString)

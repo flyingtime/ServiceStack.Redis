@@ -41,9 +41,9 @@ namespace ServiceStack.Redis.Tests
             {
                 Access20Types();
                 Access20Types();
+                client.As<T21>();
 
-                Assert.Throws<LicenseException>(() =>
-                    client.As<T21>());
+                Assert.Pass();
             }
         }
 
@@ -61,8 +61,7 @@ namespace ServiceStack.Redis.Tests
         {
             using (var client = new RedisClient(TestConfig.SingleHost))
             {
-                Assert.Throws<LicenseException>(() =>
-                    6100.Times(() => client.Get("any key")));
+                6100.Times(() => client.Get("any key"));
             }
         }
     }
@@ -73,12 +72,6 @@ namespace ServiceStack.Redis.Tests
         [Test]
         public void Allows_access_of_21_types()
         {
-#if NETCORE
-            Environment.GetEnvironmentVariable("SERVICESTACK_LICENSE");
-#else
-            Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
-#endif
-
             using (var client = new RedisClient(TestConfig.SingleHost))
             {
                 Access20Types();
@@ -91,15 +84,10 @@ namespace ServiceStack.Redis.Tests
         [Test, Ignore("Takes too long - but works!")]
         public void Allows_access_of_6100_operations()
         {
-#if NETCORE
-	        Environment.GetEnvironmentVariable("SERVICESTACK_LICENSE");
-#else
-            Licensing.RegisterLicense(new AppSettings().GetString("servicestack:license"));
-#endif
-
             using (var client = new RedisClient(TestConfig.SingleHost))
             {
                 6100.Times(() => client.Get("any key"));
+                Assert.Pass();
             }
         }
     }

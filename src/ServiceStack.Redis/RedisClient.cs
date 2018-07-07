@@ -1,4 +1,4 @@
-//
+﻿//
 // https://github.com/ServiceStack/ServiceStack.Redis/
 // ServiceStack.Redis: ECMA CLI Binding to the Redis key-value storage system
 //
@@ -382,7 +382,6 @@ namespace ServiceStack.Redis
             try
             {
                 var typedClient = new RedisTypedClient<T>(this);
-                LicenseUtils.AssertValidUsage(LicenseFeature.Redis, QuotaType.Types, __uniqueTypes.Count);
                 return typedClient;
             }
             catch (TypeInitializationException ex)
